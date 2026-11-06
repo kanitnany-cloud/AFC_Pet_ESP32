@@ -1,0 +1,19 @@
+name: Build ESP32 Firmware
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PlatformIO
+        run: pip install platformio
+      - name: Compile Code on Cloud
+        run: pio run
+      - name: Upload Firmware (.bin)
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-bin
+          path: .pio/build/jc3248w535en/firmware.bin
