@@ -9,8 +9,10 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install PlatformIO
-        run: pip install platformio
-      - name: Compile Code on Cloud
+        run: |
+          python -m pip install --upgrade pip
+          pip install platformio
+      - name: Compile Code
         run: pio run
       - name: Upload Firmware (.bin)
         uses: actions/upload-artifact@v4
